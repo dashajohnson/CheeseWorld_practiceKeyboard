@@ -11,11 +11,15 @@ public class Mouse {
     public int width;
     public int height;
     public boolean isAlive;            //a boolean to denote if the hero is alive or dead.
-    public int dx=0;                    //the speed of the hero in the x direction
-    public int dy=0;                    //the speed of the hero in the y direction
+    public int dx = 0;                    //the speed of the hero in the x direction
+    public int dy = 0;                    //the speed of the hero in the y direction
     public Rectangle rec;
     public int hits;
 
+    public boolean right;
+    public boolean down;
+    public boolean left;
+    public boolean up;
     // METHOD DEFINITION SECTION
 
     //This is a constructor that takes 3 parameters.  This allows us to specify the object's name and position when we build it.

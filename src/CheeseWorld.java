@@ -2,11 +2,15 @@
 //Add Java libraries needed for the game
 
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.*;
 import javax.swing.*;
 
-public class CheeseWorld implements Runnable {
+import java.awt.event.*;
+
+public class CheeseWorld implements Runnable, KeyListener {
 
     //Variable Definition Section
 
@@ -43,6 +47,8 @@ public class CheeseWorld implements Runnable {
 
         setUpGraphics();
 
+        canvas.addKeyListener(this);
+
         //create (construct) the objects needed for the game
         jerry = new Mouse(200, 300, 0, 0);
         cheese = new Cheese(400, 300, 3, -4);
@@ -67,7 +73,49 @@ public class CheeseWorld implements Runnable {
             }
             checkIntersections();   // check character crashes
             render();               // paint the graphics
-            pause(20);         // sleep for 20 ms
+            pause(20); // sleep for 20 ms
+            checkKeys();
+
+        }
+    }
+
+    public void checkKeys(){
+        if (tom.up == true) {
+            tom.dy = -3;
+        }
+        else if (tom.down == true) {
+            tom.dy = 3;
+        }
+        else {
+            tom.dy = 0;
+        }
+        if (tom.right == true){
+            tom.dx = 3;
+        }
+        else if (tom.left == true){
+            tom.dx = -3;
+        }
+        else {
+            tom.dx = 0;
+        }
+
+        if (jerry.up == true) {
+            jerry.dy = -3;
+        }
+        else if (jerry.down == true) {
+            jerry.dy = 3;
+        }
+        else {
+            jerry.dy = 0;
+        }
+        if (jerry.right == true){
+            jerry.dx = 3;
+        }
+        else if (jerry.left == true){
+            jerry.dx = -3;
+        }
+        else {
+            jerry.dx = 0;
         }
     }
 
@@ -166,4 +214,70 @@ public class CheeseWorld implements Runnable {
         }
     }
 
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int keyCode = e.getKeyCode();
+        System.out.println("key code: " + keyCode);
+
+        if (keyCode == 38){ // up
+            tom.up = true;
+        }
+        if (keyCode == 40){ // down
+            tom.down = true;
+        }
+        if (keyCode == 39){
+            tom.right = true;
+        }
+        if (keyCode == 37){
+            tom.left = true;
+        }
+
+        if (keyCode == 87){
+            jerry.up = true;
+        }
+        if (keyCode == 83){
+            jerry.down = true;
+        }
+        if (keyCode == 68){
+            jerry.right = true;
+        }
+        if (keyCode == 65){
+            jerry.left = true;
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        int keyCode = e.getKeyCode();
+        if (keyCode == 38){ // up
+            tom.up = false;
+        }
+        if (keyCode == 40){ // down
+            tom.down = false;
+        }
+        if (keyCode == 39){
+            tom.right = false;
+        }
+        if (keyCode == 37){
+            tom.left = false;
+        }
+
+        if (keyCode == 87){
+            jerry.up = false;
+        }
+        if (keyCode == 83){
+            jerry.down = false;
+        }
+        if (keyCode == 68){
+            jerry.right = false;
+        }
+        if (keyCode == 65){
+            jerry.left = false;
+        }
+    }
 } // end of class
